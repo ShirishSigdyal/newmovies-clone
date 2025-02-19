@@ -1,15 +1,14 @@
-import axios from "axios";
-
-import { API_KEY, BASE_URL } from "../config";
+import { http } from "./httpService";
 
 export const getTrendingMoviesForTheDay = async () => {
+  const queryParams = {
+    language: "en-US",
+    page: 1,
+  };
+
   try {
-    const response = await axios.get(`${BASE_URL}/trending/movie/day`, {
-      params: {
-        api_key: API_KEY,
-        language: "en-US",
-        page: 1,
-      },
+    const response = await http.get("/trending/movie/day", {
+      params: queryParams,
     });
     return response.data.results;
   } catch (error) {

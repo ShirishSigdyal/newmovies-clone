@@ -3,7 +3,7 @@ import React from "react";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import SearchIcon from "@mui/icons-material/Search";
 
-import { Button, Typography, Box, Paper, Stack, Chip } from "@mui/material";
+import { Button, Typography, Box, Paper, Stack } from "@mui/material";
 
 import { MediaItemProps } from "../models/model";
 
