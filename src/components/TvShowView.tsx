@@ -2,20 +2,28 @@ import React, { useEffect, useState } from "react";
 
 import { getTrendingTVShowsForTheDay } from "../services/tvshowsService";
 
-import { TvShows } from "../models/model";
+import { TvShow, MediaProps } from "../models/model";
+
 import MediaCard from "./MediaCard";
 
-const TvShowView: React.FC = () => {
-  const [tvShows, setTvShows] = useState<TvShows[]>([]);
+const TvShowView: React.FC<MediaProps> = ({ genreMap }) => {
+  const [tvShows, setTvShows] = useState<TvShow[]>([]);
 
   useEffect(() => {
     const fetchTVShows = async () => {
       const tvShowData = await getTrendingTVShowsForTheDay();
-      console.log(tvShowData, "tvshows");
       setTvShows(tvShowData);
     };
     fetchTVShows();
   }, []);
+
+  const getMediaGenre = (show: TvShow) => {
+    return show.genre_ids
+      .map((genreId: number) => {
+        return genreMap.get(genreId);
+      })
+      .filter((genre): genre is string => genre !== undefined);
+  };
 
   return (
     <div>
@@ -25,6 +33,7 @@ const TvShowView: React.FC = () => {
           name={show.name}
           date={show.first_air_date}
           key={show.id}
+          genres={getMediaGenre(show)}
         />
       ))}
     </div>
