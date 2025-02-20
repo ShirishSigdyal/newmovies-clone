@@ -48,7 +48,7 @@ const MediaCard: React.FC<MediaItemProps> = ({ item, name, date, genres }) => {
           position: "absolute",
           padding: 3,
           zIndex: 2,
-          width: "60%",
+          width: "80%",
           height: "100%",
           borderRadius: 2,
           backgroundBlendMode: "multiply",
