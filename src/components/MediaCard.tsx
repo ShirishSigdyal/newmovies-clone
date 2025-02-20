@@ -7,6 +7,8 @@ import { Button, Typography, Box, Paper, Stack } from "@mui/material";
 
 import { MediaItemProps } from "../models/model";
 
+const MAX_LENGTH = 200;
+
 const MediaCard: React.FC<MediaItemProps> = ({ item, name, date, genres }) => {
   //Handle torrent search click.
   const handleSearchTorrent = () => {
@@ -80,8 +82,14 @@ const MediaCard: React.FC<MediaItemProps> = ({ item, name, date, genres }) => {
           </Stack>
         </Box>
         <Box>
-          <Typography variant="body2" color="white" paragraph>
-            {item.overview}
+          <Typography
+            variant="body2"
+            color="white"
+            paragraph
+            sx={{ width: "60%", textAlign: "justify" }}>
+            {item.overview.length > MAX_LENGTH
+              ? item.overview.substring(0, MAX_LENGTH) + "..."
+              : item.overview}
           </Typography>
           <Box display="flex" gap={2} mt={2}>
             <Button
